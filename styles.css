@@ -1,0 +1,757 @@
+:root {
+  /* ===== Paleta de marca: 65% branco / 30% preto / 5% dourado (#D4AF37) ===== */
+  --bg: #f6f5f2;               /* fundo geral (branco levemente quente) */
+  --surface: #ffffff;          /* cards, modais */
+  --surface-2: #f1f0ec;        /* comprovantes / superfícies secundárias */
+  --text: #14120f;             /* quase preto (texto principal) */
+  --muted: #6b6a63;
+  --border: rgba(10, 10, 10, 0.10);
+  --success: #22c55e;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --zait-primary: #D4AF37;     /* dourado da marca */
+  --zait-secondary: #e8ca70;
+  --voltz-primary: #b8902a;
+  --voltz-secondary: #767672;
+  --active-primary: var(--zait-primary);
+  --active-secondary: var(--zait-secondary);
+  --ink: #0a0a0a;              /* preto de marca: sidebar, botões, header do auth */
+  --ink-2: #1c1c1c;
+  --radius: 14px;
+  --shadow: 0 24px 48px rgba(10, 10, 10, 0.14);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Poppins', Inter, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  letter-spacing: -0.01em;
+}
+
+button, input, select, textarea { font-family: inherit; }
+
+.hidden { display: none !important; }
+
+/* LAYOUT DE AUTENTICAÇÃO */
+.auth-screen {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  background: var(--ink);
+}
+
+.auth-brand {
+  padding: 40px;
+  display: grid;
+  place-items: center; 
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--ink);
+}
+
+.logo-hero-display {
+  width: 100%;
+  max-width: 500px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-logo-premium {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.25)); 
+  border-radius: 4px;
+}
+
+.auth-panel {
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  background: #ffffff;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: var(--shadow);
+}
+
+.auth-card h2 { margin: 0 0 8px; font-size: 24px; font-weight: 600; color: var(--text); }
+.auth-card p { color: var(--muted); margin: 0 0 28px; line-height: 1.6; font-size: 13px; font-weight: 300; }
+
+.toggle-auth-text { text-align: center; font-size: 13px; color: var(--muted); margin-top: 20px; }
+.toggle-auth-text a { color: var(--zait-primary); text-decoration: none; font-weight: 600; }
+
+label { display: block; color: #55534a; margin: 0 0 8px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+input, select, textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: rgba(10, 10, 10, 0.03);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 14px;
+  outline: none;
+  margin-bottom: 20px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--zait-primary); background: rgba(212, 175, 55, 0.05); }
+
+.btn {
+  border: 0;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  background: var(--ink);
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+.btn:hover { transform: translateY(-1px); opacity: 0.92; background: var(--ink-2); }
+.btn.full { width: 100%; display: block; text-align: center; }
+.btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+.btn.ghost:hover { background: rgba(10, 10, 10, 0.05); }
+.btn.danger { background: #fff; color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.35); }
+.btn.danger:hover { background: var(--danger); color: white; }
+
+/* Botões dentro da sidebar preta precisam de contraste próprio (a base acima
+   assume fundo claro). */
+.sidebar .btn.ghost { color: #fff; border-color: rgba(255, 255, 255, 0.22); }
+.sidebar .btn.ghost:hover { background: rgba(255, 255, 255, 0.08); }
+.sidebar .btn.danger { background: rgba(255, 255, 255, 0.04); color: #ff8a8a; border: 1px solid rgba(255, 138, 138, 0.35); }
+.sidebar .btn.danger:hover { background: var(--danger); color: #fff; border-color: var(--danger); }
+
+.demo-help {
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+  background: rgba(10, 10, 10, 0.03);
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+/* APP LAYOUT */
+.app {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+}
+
+.sidebar {
+  background: var(--ink);
+  color: rgba(255, 255, 255, 0.85);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-size: 24px;
+  color: #fff;
+}
+.logo .light { font-weight: 300; color: var(--zait-primary); }
+
+.logo-sidebar-display {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.img-logo-sidebar { width: 100%; height: 100%; object-fit: contain; }
+
+.account-switcher {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 14px;
+  padding: 8px;
+  display: grid;
+  gap: 6px;
+}
+
+.switch-btn {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.55);
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+.switch-btn small { font-weight: 300; opacity: 0.7; }
+.switch-btn.active { background: rgba(255, 255, 255, 0.08); color: #fff; border: 1px solid rgba(212, 175, 55, 0.35); }
+.switch-btn:disabled { opacity: 0.2; cursor: not-allowed; }
+
+.nav button svg {
+  width: 20px !important;    
+  height: 20px !important;   
+  color: var(--zait-primary) !important;
+  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.35));
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.nav button {
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 12px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  font-weight: 400;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.nav button:hover { color: #fff; background: rgba(255, 255, 255, 0.06); }
+.nav button:hover svg { color: #f2d988 !important; transform: scale(1.08); }
+
+.nav button.active {
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.22), rgba(212, 175, 55, 0.04));
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  color: #fff;
+  font-weight: 600;
+}
+.nav button.active svg { color: #f2d988 !important; transform: scale(1.08); }
+
+/* GRIDS E CONTAINERS */
+.main { padding: 32px; overflow: hidden; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 32px; }
+.title h1 { margin: 0; font-size: 26px; font-weight: 600; color: var(--text); }
+.title p { margin: 4px 0 0; color: var(--muted); font-size: 13px; font-weight: 300; }
+
+.user-box { display: flex; align-items: center; gap: 14px; }
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--zait-primary), var(--zait-secondary));
+  display: grid;
+  place-items: center;
+  color: #000;
+  font-weight: 700;
+}
+
+.grid { display: grid; gap: 20px; }
+.cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.two { grid-template-columns: 1.3fr 0.7fr; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: 0 10px 24px rgba(10, 10, 10, 0.06);
+  color: var(--text);
+}
+.card h3 { margin: 0 0 16px; font-size: 16px; font-weight: 600; }
+/* Alguns cards (ex.: seleção de conta bolsão) são <button class="card">.
+   Sem isso, o navegador aplica a cor padrão de botão por cima do tema,
+   deixando o texto ilegível dentro do card. */
+button.card {
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text);
+}
+button.card:hover { border-color: rgba(10, 10, 10, 0.18); }
+button.card h4, button.card strong { color: inherit; }
+.metric { font-size: 26px; font-weight: 700; margin: 8px 0 4px; color: var(--text); }
+
+.pill { display: inline-flex; padding: 4px 10px; border-radius: 999px; background: rgba(10, 10, 10, 0.045); color: var(--muted); font-size: 11px; font-weight: 500; }
+.pill.ok { color: #16a34a; background: rgba(34, 197, 94, 0.10); }
+.pill.warn { color: #b45309; background: rgba(245, 158, 11, 0.12); }
+
+/* TABELAS */
+.table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table { width: 100%; border-collapse: collapse; min-width: 600px; } 
+th, td { padding: 14px 12px; border-bottom: 1px solid var(--border); text-align: left; font-size: 13px; }
+th { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+
+select.table-select {
+  background: rgba(10, 10, 10, 0.04);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+/* ==================== SISTEMA DE MODAIS ==================== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 20px;
+}
+.modal-content {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 500px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  animation: slideUp 0.3s ease;
+  color: var(--text);
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.modal-header h3 { margin: 0; font-size: 18px; }
+.btn-close {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 24px;
+  cursor: pointer;
+}
+.btn-close:hover { color: var(--text); }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== TOAST NOTIFICATIONS ==================== */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--zait-primary);
+  color: #000;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  display: none;
+  z-index: 10000;
+  box-shadow: 0 10px 20px rgba(10, 10, 10, 0.25);
+}
+
+/* RESPONSIVIDADE GERAL */
+@media (max-width: 1200px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 980px) {
+  .auth-screen { grid-template-columns: 1fr; }
+  .auth-brand { display: none; }
+  .app { grid-template-columns: 1fr; display: flex; flex-direction: column; }
+  .sidebar { height: auto; position: relative; padding: 16px 24px; border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.08); flex-direction: column; gap: 16px; }
+  .account-switcher { grid-template-columns: 1fr 1fr; }
+  .nav { display: flex; overflow-x: auto; gap: 8px; padding-bottom: 8px; -webkit-overflow-scrolling: touch; }
+  .nav button { width: auto; white-space: nowrap; flex-shrink: 0; }
+  .sidebar-footer { display: flex; gap: 10px; margin-top: 8px; }
+  .main { padding: 24px 16px; }
+  .two { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .cards { grid-template-columns: 1fr; }
+  .auth-card { padding: 24px; border-radius: 16px; }
+  .topbar { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .user-box { width: 100%; justify-content: flex-start; }
+  .account-switcher { grid-template-columns: 1fr; }
+}
+/* ==================== NOVOS ESTILOS DO CORE BANCÁRIO DIGITAL ==================== */
+
+/* Botão de Modo Privacidade do Saldo (Olho) */
+.privacy-toggle {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+.privacy-toggle:hover {
+  color: var(--text);
+  background: rgba(10, 10, 10, 0.05);
+}
+.privacy-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Caixa de Upload de Documentos Fake (KYC Onboarding) */
+.mock-upload-box {
+  border: 2px dashed var(--border);
+  background: rgba(10, 10, 10, 0.02);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  transition: all 0.2s ease;
+}
+.mock-upload-box:hover {
+  border-color: var(--zait-primary);
+  background: rgba(212, 175, 55, 0.05);
+}
+.mock-upload-box .upload-icon {
+  font-size: 24px;
+}
+.mock-upload-box .upload-text {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Spinner de Carregamento de Transação */
+.loader-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--border);
+  border-top-color: var(--zait-primary);
+  border-radius: 50%;
+  margin: 0 auto;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Card Estruturado de Comprovantes Bancários */
+.receipt-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  color: var(--text);
+}
+.receipt-header {
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  font-size: 22px;
+  text-align: center;
+  margin-bottom: 12px;
+}
+.receipt-header .light {
+  font-weight: 300;
+  color: var(--zait-primary);
+}
+.receipt-card p {
+  margin: 8px 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+.receipt-card strong {
+  color: var(--text);
+}
+
+/* Selects com tema claro (fundo branco / texto preto) */
+select,
+select.form-control,
+select.input,
+.form-select,
+.transfer-select,
+select.admin-select,
+select.operational-lock-select {
+  background-color: #ffffff !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  color-scheme: light;
+}
+
+select option,
+select optgroup {
+  background-color: #ffffff !important;
+  color: var(--text) !important;
+}
+
+select option:checked,
+select option:hover,
+select option:focus {
+  background-color: rgba(212, 175, 55, 0.18) !important;
+  color: var(--text) !important;
+}
+
+select:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Configuração do texto geral da logo dentro do card */
+.auth-card .brand-text {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+/* ZAIT em Dourado */
+.auth-card .gold {
+  color: var(--zait-primary);
+}
+
+/* PAY em preto (o card de login agora é claro) */
+.auth-card .light {
+  color: var(--text);
+}
+
+/* Garante que a imagem da ampulheta fique com um tamanho legal ao lado do texto */
+.img-logo-sidebar {
+  height: 30px;
+  width: auto;
+  display: block;
+}
+/* ==================== CORES POR PERFIL (CLIENTE / GERENTE) ==================== */
+.role-badge-client {
+  color: #3b82f6 !important;
+  background: rgba(59, 130, 246, 0.12) !important;
+  border: 1px solid rgba(59, 130, 246, 0.25) !important;
+  font-weight: 700;
+}
+.role-badge-manager {
+  color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.12) !important;
+  border: 1px solid rgba(239, 68, 68, 0.25) !important;
+  font-weight: 700;
+}
+.role-badge-admin {
+  color: #a9822a !important;
+  background: rgba(212, 175, 55, 0.15) !important;
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+  font-weight: 700;
+}
+
+/* userRole no topbar */
+#userRole.role-client { color: #3b82f6 !important; font-weight: 600; }
+#userRole.role-manager { color: #ef4444 !important; font-weight: 600; }
+#userRole.role-admin { color: #a9822a !important; font-weight: 600; }
+
+/* avatar por perfil */
+.avatar.role-client {
+  background: linear-gradient(135deg, #1d4ed8, #3b82f6) !important;
+  color: #fff;
+}
+.avatar.role-manager {
+  background: linear-gradient(135deg, #991b1b, #ef4444) !important;
+  color: #fff;
+}
+
+/* ==================== COMPROVANTES COM LOGO E AÇÕES ==================== */
+.receipt-logo-area {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.receipt-logo-area img {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2));
+}
+.receipt-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+.receipt-actions .btn {
+  flex: 1;
+  min-width: 120px;
+  font-size: 13px;
+  padding: 10px 14px;
+}
+
+/* ==================== RESPONSIVIDADE MELHORADA ==================== */
+@media (max-width: 768px) {
+  .main { padding: 16px 12px; }
+  .card { padding: 16px; border-radius: 12px; }
+  .grid.two { grid-template-columns: 1fr !important; }
+  .grid.cards { grid-template-columns: 1fr !important; }
+  .modal-content { padding: 18px 14px; border-radius: 16px; max-width: calc(100vw - 24px); }
+  .topbar { gap: 12px; }
+  .title h1 { font-size: 20px; }
+  table { min-width: 480px; }
+  th, td { padding: 10px 8px; font-size: 12px; }
+  .btn { padding: 12px 14px; font-size: 13px; }
+  .receipt-actions { flex-direction: column; }
+}
+
+@media (max-width: 480px) {
+  .sidebar { padding: 12px 14px; }
+  .account-switcher { gap: 4px; }
+  .switch-btn { padding: 8px; font-size: 11px; }
+  .metric { font-size: 22px; }
+  .auth-card { padding: 20px; }
+  .auth-card h2 { font-size: 20px; }
+  input, select, textarea { padding: 12px; font-size: 14px; }
+}
+
+/* ==================== APP MOBILE ESTILO BANCÁRIO (CLIENTE) ==================== */
+
+/* Barra de navegação inferior fixa — só aparece pro cliente em telas
+   estreitas. No desktop ela fica escondida e o menu lateral de sempre
+   continua valendo. */
+.mobile-tab-bar {
+  display: none;
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  background: #ffffff;
+  border-top: 1px solid var(--border);
+  padding: 8px 6px calc(8px + env(safe-area-inset-bottom));
+  z-index: 500;
+  box-shadow: 0 -8px 24px rgba(10,10,10,0.06);
+}
+
+.tab-item {
+  background: transparent;
+  border: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 0;
+  color: var(--muted);
+  cursor: pointer;
+}
+.tab-item svg { width: 22px; height: 22px; }
+.tab-label { font-size: 10px; font-weight: 600; }
+.tab-item.active { color: var(--ink); }
+.tab-item.active svg { color: var(--zait-primary); }
+
+.tab-item-center {
+  margin-top: -26px;
+  color: var(--text);
+}
+.tab-center-circle {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(10,10,10,0.28);
+  border: 3px solid #fff;
+  margin-bottom: 2px;
+}
+.tab-center-circle svg { width: 24px; height: 24px; color: var(--zait-primary); }
+.tab-item-center .tab-label { font-weight: 700; color: var(--text); }
+
+/* Layout: quando é o cliente em modo mobile, escondemos a sidebar de
+   navegação de desktop e mostramos a barra inferior no lugar. */
+@media (max-width: 980px) {
+  .app.client-mobile-nav { display: block; }
+  .app.client-mobile-nav .sidebar { display: none; }
+  .app.client-mobile-nav .main { padding: 18px 14px 90px; }
+  .app.client-mobile-nav .mobile-tab-bar { display: flex; align-items: flex-end; }
+  .app.client-mobile-nav .topbar { margin-bottom: 18px; }
+}
+
+/* Saudação */
+.mobile-greeting { margin-bottom: 14px; }
+.mobile-greeting h2 { margin: 2px 0 0; font-size: 22px; font-weight: 700; color: var(--text); }
+
+/* Cartão de saldo estilo app bancário */
+.balance-card-v2 {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 22px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 28px rgba(10,10,10,0.06);
+}
+.balance-card-v2-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.balance-card-v2-top .muted { font-size: 12px; font-weight: 600; }
+.balance-card-v2-amount { font-size: 32px; font-weight: 800; color: var(--text); margin-bottom: 16px; }
+.balance-card-v2-stats { display: flex; gap: 10px; }
+.mini-stat {
+  flex: 1;
+  background: rgba(10,10,10,0.03);
+  border-radius: 14px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.mini-stat-label { font-size: 11px; color: var(--muted); font-weight: 600; }
+.mini-stat-value { font-size: 14px; font-weight: 700; }
+
+/* Grid de serviços (Pix, Transferir, Boleto, Extrato, Cobrar, Segurança) */
+.services-section { margin-bottom: 18px; }
+.services-title { font-size: 15px; font-weight: 700; color: var(--text); margin: 0 0 12px; }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.service-icon-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(10,10,10,0.05);
+}
+.service-icon-btn:active { transform: scale(0.97); }
+.service-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(212,175,55,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.service-icon-circle svg { width: 20px; height: 20px; color: var(--zait-primary); }
+.service-icon-label { font-size: 12px; font-weight: 600; color: var(--text); text-align: center; }
+
+@media (max-width: 380px) {
+  .balance-card-v2-amount { font-size: 27px; }
+  .service-icon-label { font-size: 11px; }
+}
